@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>OscaRohit — Shop the Best</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b1020; --card:#0f1724; --muted:#9aa4bf; --accent1:#ff5a5f; --accent2:#4ecdc4; --glass: rgba(255,255,255,0.04);
+      --radius:14px; --maxw:1200px;
+    }
+    *{box-sizing:border-box}
+    body{font-family:Inter,system-ui,Arial;background:linear-gradient(180deg,var(--bg),#07101a);color:#e6eef8;line-height:1.4;margin:0}
+    .wrap{max-width:var(--maxw);margin:28px auto;padding:18px}
+
+    /* Header */
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{background:linear-gradient(90deg,var(--accent1),var(--accent2));width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#08121a}
+    .brand h1{font-size:20px;margin:0}
+    .searchbar{flex:1;max-width:620px;display:flex;align-items:center;background:var(--glass);padding:8px;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+    .searchbar input{background:transparent;border:0;outline:0;color:var(--muted);padding:8px;font-size:15px;flex:1}
+    .icons{display:flex;gap:12px;align-items:center}
+    .icon{background:rgba(255,255,255,0.03);padding:8px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);cursor:pointer}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 320px;gap:20px;align-items:stretch;margin-top:18px}
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:24px;border-radius:var(--radius);box-shadow:0 8px 32px rgba(0,0,0,0.6);position:relative}
+    .hero-title{font-size:28px;margin:0 0 10px}
+    .hero-desc{color:var(--muted);margin-bottom:16px}
+    .hero-actions{display:flex;gap:10px}
+    .btn{padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:700}
+    .btn-primary{background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#08121a}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+    .promo{background:linear-gradient(90deg, rgba(78,205,196,0.08), rgba(255,90,95,0.06));padding:12px;border-radius:12px;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+
+    /* Categories */
+    .cats{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+    .cat{background:rgba(255,255,255,0.03);padding:10px 12px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);color:var(--muted);cursor:pointer}
+
+    /* Grid */
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:22px}
+    .product{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);overflow:hidden}
+    .thumb{height:160px;border-radius:8px;background-size:cover;background-position:center;margin-bottom:10px}
+    .p-title{font-weight:600;margin:0 0 6px}
+    .p-desc{color:var(--muted);font-size:13px;margin-bottom:10px}
+    .p-row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+    .price{font-weight:800}
+    .add{background:var(--accent2);color:#08121a;padding:8px 10px;border-radius:10px;border:0;cursor:pointer}
+
+    /* Cart sidebar */
+    .cart{position:fixed;right:18px;top:80px;width:360px;background:#071223;border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.04);box-shadow:0 10px 40px rgba(0,0,0,0.6)}
+    .cart h3{margin:0 0 12px}
+    .cart-items{max-height:380px;overflow:auto}
+    .cart-item{display:flex;gap:10px;align-items:center;padding:8px;border-radius:8px;background:rgba(255,255,255,0.01);margin-bottom:8px}
+    .cart-thumb{width:56px;height:56px;border-radius:6px;background-size:cover}
+    .cart-footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+
+    /* Modal */
+    .modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.75);display:none;align-items:center;justify-content:center}
+    .modal{background:#07101a;padding:18px;border-radius:12px;max-width:920px;width:92%;box-shadow:0 14px 60px rgba(0,0,0,0.7)}
+
+    /* Responsive */
+    @media (max-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}}
+    @media (max-width:800px){.hero{grid-template-columns:1fr} .grid{grid-template-columns:repeat(2,1fr)} .cart{display:none}}
+    @media (max-width:480px){.grid{grid-template-columns:1fr}}
+
+    footer{margin-top:40px;color:var(--muted);text-align:center;padding:28px}
+
+    /* small niceties */
+    .badge{background:linear-gradient(90deg,var(--accent1),var(--accent2));padding:6px 8px;border-radius:8px;color:#08121a;font-weight:700}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">OR</div>
+        <div>
+          <h1>OscaRohit</h1>
+          <div style="font-size:12px;color:var(--muted)">Shop the best — curated for you</div>
+        </div>
+      </div>
+      <div class="searchbar">
+        <input id="search" placeholder="Search for products, brands and more..." />
+        <button class="icon" id="searchBtn">??</button>
+      </div>
+      <div class="icons">
+        <div class="icon">??</div>
+        <div class="icon" id="cartToggle">?? <span id="cartCount" style="margin-left:6px;">0</span></div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-card">
+        <div class="badge">Limited Offer</div>
+        <h2 class="hero-title">Welcome to OscaRohit — Your vibrant online marketplace</h2>
+        <p class="hero-desc">A colorful, fast, and responsive demo e-commerce site built in pure HTML, CSS & vanilla JS. Explore products, add to cart, and view details.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" onclick="scrollToGrid()">Shop Now</button>
+          <button class="btn btn-ghost">Explore Categories</button>
+        </div>
+
+        <div class="cats">
+          <div class="cat">Electronics</div>
+          <div class="cat">Home & Kitchen</div>
+          <div class="cat">Fashion</div>
+          <div class="cat">Toys</div>
+          <div class="cat">Books</div>
+        </div>
+      </div>
+
+      <aside style="position:relative">
+        <div class="promo">
+          <div>
+            <div style="font-weight:800">Deal of the Day</div>
+            <div style="font-size:13px">Up to 40% off selected items</div>
+          </div>
+          <img src="https://picsum.photos/120/80?random=12" style="border-radius:10px;"/>
+        </div>
+
+        <div style="margin-top:14px;background:var(--card);padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)">
+          <h4 style="margin:0 0 8px">Top Categories</h4>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;justify-content:space-between"><span>Mobile & Accessories</span><span style="color:var(--muted)">1200+</span></div>
+            <div style="display:flex;justify-content:space-between"><span>Home Appliances</span><span style="color:var(--muted)">430+</span></div>
+            <div style="display:flex;justify-content:space-between"><span>Fashion</span><span style="color:var(--muted)">980+</span></div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <main>
+      <h2 style="margin-top:22px">Featured Products</h2>
+      <div id="grid" class="grid"></div>
+    </main>
+
+    <footer>
+      © <span id="year"></span> OscaRohit — Built for learning & demo purposes
+    </footer>
+  </div>
+
+  <div id="cartPanel" class="cart">
+    <h3>Your Cart</h3>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div style="font-weight:800">Total: ?<span id="cartTotal">0</span></div>
+      <button class="btn btn-primary" onclick="checkout()">Checkout</button>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div id="backdrop" class="modal-backdrop" onclick="closeModal(event)">
+    <div class="modal" id="modal" onclick="event.stopPropagation()"></div>
+  </div>
+
+  <script>
+    const products = [
+      {id:1,title:'Wireless Headphones',desc:'Noise-cancelling, long battery',price:2999,img:'https://picsum.photos/seed/1/600/400'},
+      {id:2,title:'Smart Watch',desc:'Fitness tracker + notifications',price:4999,img:'https://picsum.photos/seed/2/600/400'},
+      {id:3,title:'Espresso Maker',desc:'Compact coffee machine',price:8999,img:'https://picsum.photos/seed/3/600/400'},
+      {id:4,title:'Classic Leather Wallet',desc:'Premium finish, RFID safe',price:1299,img:'https://picsum.photos/seed/4/600/400'},
+      {id:5,title:'Bluetooth Speaker',desc:'Portable with deep bass',price:2199,img:'https://picsum.photos/seed/5/600/400'},
+      {id:6,title:'Running Shoes',desc:'Lightweight & breathable',price:3599,img:'https://picsum.photos/seed/6/600/400'},
+      {id:7,title:'Desk Lamp',desc:'Adjustable brightness, USB-C',price:899,img:'https://picsum.photos/seed/7/600/400'},
+      {id:8,title:'Hardcover Notebook',desc:'200 pages, premium paper',price:499,img:'https://picsum.photos/seed/8/600/400'}
+    ];
+
+    const grid = document.getElementById('grid');
+    const cartItemsEl = document.getElementById('cartItems');
+    const cartTotalEl = document.getElementById('cartTotal');
+    const cartCountEl = document.getElementById('cartCount');
+    const cartPanel = document.getElementById('cartPanel');
+    const backdrop = document.getElementById('backdrop');
+    const modal = document.getElementById('modal');
+
+    let cart = [];
+
+    function formatINR(x){ return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }
+
+    function renderProducts(list){
+      grid.innerHTML = '';
+      list.forEach(p=>{
+        const el = document.createElement('div'); el.className='product';
+        el.innerHTML = `
+          <div class="thumb" style="background-image:url('${p.img}')"></div>
+          <h4 class="p-title">${p.title}</h4>
+          <div class="p-desc">${p.desc}</div>
+          <div class="p-row">
+            <div class="price">?${formatINR(p.price)}</div>
+            <div>
+              <button class="add" onclick='addToCart(${p.id})'>Add</button>
+              <button class="btn btn-ghost" onclick='openModal(${p.id})'>View</button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(el);
+      })
+    }
+
+    function addToCart(id){
+      const p = products.find(x=>x.id===id);
+      const found = cart.find(x=>x.id===id);
+      if(found){ found.qty++; }
+      else { cart.push({...p,qty:1}); }
+      updateCartUI();
+      showToast(p.title + ' added to cart');
+    }
+
+    function updateCartUI(){
+      cartItemsEl.innerHTML='';
+      let total=0, count=0;
+      cart.forEach(i=>{
+        total += i.price * i.qty; count += i.qty;
+        const div = document.createElement('div'); div.className='cart-item';
+        div.innerHTML = `
+          <div class="cart-thumb" style="background-image:url('${i.img}')"></div>
+          <div style="flex:1">
+            <div style="font-weight:700">${i.title}</div>
+            <div style="color:var(--muted);font-size:13px">?${formatINR(i.price)} x ${i.qty}</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <button class="btn" onclick='changeQty(${i.id},1)'>+</button>
+            <button class="btn" onclick='changeQty(${i.id},-1)'>-</button>
+          </div>
+        `;
+        cartItemsEl.appendChild(div);
+      })
+      cartTotalEl.textContent = formatINR(total);
+      cartCountEl.textContent = count;
+    }
+
+    function changeQty(id,delta){
+      const idx = cart.findIndex(x=>x.id===id);
+      if(idx!==-1){ cart[idx].qty += delta; if(cart[idx].qty<=0) cart.splice(idx,1); }
+      updateCartUI();
+    }
+
+    function openModal(id){
+      const p = products.find(x=>x.id===id);
+      modal.innerHTML = `
+        <div style=\"display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap\">
+          <img src='${p.img}' style='width:320px;border-radius:10px'/>
+          <div style='flex:1'>
+            <h2 style='margin-top:0'>${p.title}</h2>
+            <p style='color:var(--muted)'>${p.desc}</p>
+            <div style='font-weight:800;font-size:20px;margin-top:12px'>?${formatINR(p.price)}</div>
+            <div style='margin-top:12px;display:flex;gap:10px'>
+              <button class='btn btn-primary' onclick='addToCart(${p.id}); closeModal()'>Add to Cart</button>
+              <button class='btn btn-ghost' onclick='closeModal()'>Close</button>
+            </div>
+          </div>
+        </div>
+      `;
+      backdrop.style.display = 'flex';
+    }
+
+    function closeModal(e){ backdrop.style.display = 'none'; }
+
+    function checkout(){ alert('This is a demo checkout. Implement backend to process orders.'); }
+
+    function scrollToGrid(){ document.getElementById('grid').scrollIntoView({behavior:'smooth'}); }
+
+    function showToast(msg){
+      const t = document.createElement('div');
+      t.textContent = msg; t.style.position='fixed'; t.style.bottom='18px'; t.style.left='18px'; t.style.background='rgba(0,0,0,0.6)'; t.style.padding='10px 12px'; t.style.borderRadius='8px'; t.style.zIndex=10000;
+      document.body.appendChild(t);
+      setTimeout(()=>t.remove(),1600);
+    }
+
+    document.getElementById('cartToggle').addEventListener('click', ()=>{ cartPanel.style.display = cartPanel.style.display==='block'?'none':'block'; });
+    document.getElementById('searchBtn').addEventListener('click', ()=>{ const q = document.getElementById('search').value.toLowerCase(); renderProducts(products.filter(p=>p.title.toLowerCase().includes(q))); });
+
+    // init
+    renderProducts(products);
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
